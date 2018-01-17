@@ -8,55 +8,70 @@ class List extends Component {
 
 
   render() {
-    return (
-      <ul>
-       {
-        this.props.movieList.map((el, i) => {
-          var inputMatch = new RegExp(this.props.searchInput, "gi");
-          if (el.title.includes(this.props.searchInput)) {
-            var highlightedTitle = el.title.replace(inputMatch, <span></span>)
-            console.log(highlightedTitle);
-          }
-
-
-
-
-
-          //   return (
-          //     <div style={{"listStyle": "none"}} key={el.title}> {splitTitle.map((el, i) => {
-          //       return <span key={i} style={el.toLowerCase() === inputMatch.toLowerCase() ? { fontWeight: 'bold'} : {} }> {el} </span>   }
-          //     })}
-          //     )
-
-
-
-          //    <span style={{textDecoration: "line-through"}} dangerouslySetInnerHTML={{__html: inputMatch}}></span>)
-          //   // return (
-          //   //   el.title = el.title.replace(inputMatch, <div style={{color: "yellow"}}>{el.title}</div>)
-          //   //   <li style={{"listStyle": "none"}} key={el.title}>{el.title}</li>
-          //   //   )
-          // }
-          return (
-
-            <li style={{"listStyle": "none"}} key={el.title}>{el.title}</li>
-          )
-       })
-      }
-      <pre>{this.props.searchInput}</pre>
-      </ul>
-    );
+    if (this.props.currentTab === "toSeeTab") {
+      return (
+        <ul>
+        {this.props.toSeeList.map((el, i) => {
+          <div key={el.title}>
+            <li style={{"listStyle": "none"}}>{el.title}</li>
+            <button onClick={() => {this.props.markWatched(i)}}>Watched</button>
+          </div>
+        })}
+        </ul>
+      )
+    } else if (this.props.currentTab === "watchedTab") {
+      return (
+        <ul>
+          {this.props.toSeeList.map((el, i) => {
+            <div key={el.title}>
+              <li style={{"listStyle": "none"}}>{el.title}</li>
+              <button onClick={() => {this.props.markWatched(i)}}>Watched</button>
+            </div>
+          })}
+        </ul>
+      )
+    }
   }
 }
 
 export default List;
 
 
-// getHighlightedText(text, higlight) {
-//     // Split on higlight term and include term into parts, ignore case
-//     let parts = text.split(new RegExp(`(${higlight})`, 'gi'));
-//     return <span> { parts.map((part, i) =>
-//         <span key={i} style={part.toLowerCase() === higlight.toLowerCase() ? { fontWeight: 'bold' } : {} }>
-//             { part }
-//         </span>)
-//     } </span>;
-// }
+
+
+
+    // var inputMatch = new RegExp(this.props.searchInput, "gi");
+                  // if (el.title.includes(this.props.searchInput)) {
+                  //   el.title = el.title.replace(inputMatch, <span style={{color: "yellow"}}>{el.title}</span>)
+                  // }
+
+      // <ul>
+      //   {
+
+
+
+      //         )
+
+      //     } else if  {
+      //       return (
+      //           this.props.toSeeList.map((el, i) => {
+      //             // var inputMatch = new RegExp(this.props.searchInput, "gi");
+      //             // if (el.title.includes(this.props.searchInput)) {
+      //             //   el.title = el.title.replace(inputMatch, <span style={{color: "yellow"}}>{el.title}</span>)
+      //             // }
+      //             if(!el.watched) {
+      //               return (
+      //                 <div key={el.title}>
+      //                   <li style={{"listStyle": "none"}}>{el.title}</li>
+      //                   <button onClick={() => {this.props.markWatched(i)}}>Watched</button>
+      //                 </div>
+      //               )
+      //             }
+      //           })
+
+      //         )
+
+      //     }
+
+      //   }
+      // </ul>

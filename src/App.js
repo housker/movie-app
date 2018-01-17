@@ -3,42 +3,53 @@
 import React, { Component } from 'react';
 import List from './List';
 import Search from './Search';
+import Add from './Add';
+import Tabbies from './Tabbies';
+import Watched from './Watched';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movieList: [
-        {title: 'Mean Girls'},
-        {title: 'Hackers'},
-        {title: 'The Grey'},
-        {title: 'Sunshine'},
-        {title: 'Ex Machina'},
+      toSeeList: [
+        // {title: 'Mean Girls'},
+        // {title: 'Hackers'},
+        // {title: 'The Grey'},
+        // {title: 'Sunshine'},
+        // {title: 'Ex Machina'},
       ],
-      searchInput: undefined
+      watchedList: [],
+      searchInput: undefined,
+      currentTab: 'toSeeTab'
     }
   }
 
   findMovie(input) {
-    // var temp = this.state.searchInput;
-    // temp = input;
-    this.setState({searchInput: input});
-    // var temp = this.state.movieList.slice(0);
-    // var inputMatch = new RegExp(input, "gi");
-    // var hlMovies = temp.forEach(el => {
-    //   if (el.title.includes(input)) {
-    //     el.title.replace(inputMatch, <div className="hl">{el.title}</div>)
-    //   }
-    // })
-    // this.setState({movieList: hlMovies})
+    var temp = this.state.movieList.slice(0);
+    // this.setState({searchInput: input});
+    var movieMatches = temp.filter(el => {
+      return el.title.toLowerCase().includes(input.toLowerCase())
+    });
+    this.setState({movieList: movieMatches})
+  }
 
-    // var movieMatches = temp.filter(el => {
-    //   return el.title.toLowerCase().includes(input.toLowerCase())
-    // });
-    // this.setState({movieList: movieMatches})
+  addMovie(input) {
+    var temp = this.state.toSeeList.slice(0);
+    temp.push({title: input, watched: false});
+    this.setState({movieList: temp});
+    document.getElementById("addedMovie").value = "";
+  }
 
-    // var highlight = temp.title.replace(inputMatch, <div className="hl">{this.value}</div>)
+  markWatched(index) {
+    var temp = this.state.toSeeList.slice(0);
+    temp[index].watched = true;
+    this.setState({watchedList: temp})
+  }
+
+  switchTab(input) {
+    this.setState({currentTab: input})
+
   }
 
 
@@ -47,13 +58,26 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Movie App</h1>
+          <Add
+          addMovie={this.addMovie.bind(this)}
+          />
           <Search
           findMovie={this.findMovie.bind(this)}
           />
         </header>
+        <Tabbies
+        currentTab={this.state.currentTab}
+        />
         <List
-        movieList={this.state.movieList}
+        watchedList={this.state.watchedList}
+        toSeeList={this.state.toSeeList}
         searchInput={this.state.searchInput}
+        currentTab={this.state.currentTab}
+        // markWatched={this.markWatched.bind(this)}
+        />
+        <Watched
+        movieList={this.state.movieList}
+        currentTab={this.state.currentTab}
         />
       </div>
     );

@@ -11,7 +11,7 @@ class Search extends Component {
     return (
       <div>
         <input id="movieQuery"></input>
-        <button onClick={() => {this.props.findMovie(document.getElementById("movieQuery").value)}} >Submit</button>
+        <button onClick={() => {this.props.findMovie(document.getElementById("movieQuery").value)}}>Search</button>
       </div>
     );
   }
