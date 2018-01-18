@@ -1,6 +1,9 @@
 //https://medium.com/trisfera/a-simple-react-tabs-component-47cac2cfbb5
 //https://codepen.io/trey/post/tabbed-navigation-react
 
+
+//There are issues with Tabs. Add active after the click so that tab looks different. Get the right rendering.  Corresponding what's active with waht's been clicked.
+
 //render everything in list, have in state the tab: 1/2/etc, and the watched: [], and toWatch: []
 
 //when localhosting for links that go to different webpages, use react-router
@@ -17,12 +20,15 @@ class Tabbies extends Component {
 
   render() {
     return (
-    <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a id="toseeTab" className={"nav-link active"} href="#">To See</a>
+    <ul className="nav nav-tabs">
+  <li className="nav-item">
+    <a id="toSeeTab" onClick={() => {this.props.switchTab("toSeeTab")}} className={this.props.toSeeTab.currentTab ? "nav-link active" : "nav-link"} >To See</a>
   </li>
-  <li class="nav-item">
-    <a id="watchedTab" class="nav-link" href="./Watched">Watched</a>
+  <li className="nav-item">
+    <a id="watchedTab" onClick={() => {this.props.switchTab("watchedTab")}} className={this.props.watchedTab.currentTab ? "nav-link active" : "nav-link"}>Watched</a>
+  </li>
+    <li className="nav-item">
+    <a id="searchResultsTab" onClick={() => {this.props.switchTab("searchResultsTab")}} className={this.props.searchResultsTab.currentTab ? "nav-link active" : "nav-link"}>Search Results</a>
   </li>
 </ul>
     );
@@ -31,6 +37,8 @@ class Tabbies extends Component {
 
 export default Tabbies;
 
+
+// () => {switchTab(document.getElementById("toSeeTab").value)}
 
  // onClick={(e) => {console.log(e)}}
  //onClick={(e) => {e.target.addClassName('active')}}

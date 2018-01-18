@@ -8,34 +8,95 @@ class List extends Component {
 
 
   render() {
-    if (this.props.currentTab === "toSeeTab") {
-      return (
-        <ul>
-        {this.props.toSeeList.map((el, i) => {
-          <div key={el.title}>
-            <li style={{"listStyle": "none"}}>{el.title}</li>
-            <button onClick={() => {this.props.markWatched(i)}}>Watched</button>
-          </div>
-        })}
-        </ul>
-      )
-    } else if (this.props.currentTab === "watchedTab") {
-      return (
-        <ul>
-          {this.props.toSeeList.map((el, i) => {
-            <div key={el.title}>
-              <li style={{"listStyle": "none"}}>{el.title}</li>
-              <button onClick={() => {this.props.markWatched(i)}}>Watched</button>
-            </div>
-          })}
-        </ul>
-      )
-    }
+
+
+
+      if (this.props.toSeeTab.currentTab) {
+        return (
+         <ul>{
+          this.props.toSeeList.map((el, i) => {
+            return (
+              <div key={el.title}>
+                <li style={{"listStyle": "none"}}>{el.title}</li>
+                <button onClick={() => {this.props.markWatched(el, i)}}>Watched</button>
+              </div>
+              )
+
+          })
+
+
+         }</ul>
+
+        )
+      } else if (this.props.watchedTab.currentTab) {
+        return (
+         <ul>{
+          this.props.watchedList.map((el, i) => {
+            return (
+              <div key={el.title}>
+                <li style={{"listStyle": "none"}}>{el.title}</li>
+              </div>
+              )
+
+          })
+
+
+         }</ul>
+
+        )
+      } else if (this.props.searchResultsTab.currentTab) {
+        return (
+         <ul>{
+          this.props.searchResultsList.map((el, i) => {
+            return (
+              <div key={el.title}>
+                <li style={{"listStyle": "none"}}>{el.title}</li>
+              </div>
+              )
+
+          })
+
+
+         }</ul>
+
+        )
+      }
+
+
+
+
+
+
   }
 }
 
 export default List;
 
+
+
+// if (this.props.currentTab === "toSeeTab") {
+//       console.log("TO SEE LIST", this.props.toSeeList)
+
+
+    // } else if (this.props.currentTab === "watchedTab") {
+    //   return (
+    //       {this.props.toSeeList.map((el, i) => {
+    //         <div key={el.title}>
+    //           <li style={{"listStyle": "none"}}>{el.title}</li>
+    //           <button onClick={() => {this.props.markWatched(i)}}>Watched</button>
+    //         </div>
+    //       })}
+    //   )
+    // }
+
+
+// {this.props.toSeeList.map((el, i) => {
+//           return (
+//    <div key={el.title}>
+//             <li style={{"listStyle": "none"}}>{el.title}</li>
+//             <button onClick={() => {this.props.markWatched(i)}}>Watched</button>
+//           </div>
+//         })}
 
 
 
